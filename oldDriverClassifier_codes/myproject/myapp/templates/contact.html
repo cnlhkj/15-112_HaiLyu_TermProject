@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script>
+        $(document).ready(function () {
+        $('.slider').slider();
+        });
+        </script>
+        </script>
+        <!-- Icons! -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>About</title>
+    </head>
+
+    <body>
+
+        <nav>
+            <div class="nav-wrapper blue">
+              <a href="#" class="brand-logo">  Old Driver Classifier</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/myapp/home">Home</a></li>
+                <li><a href="/myapp/about">About</a></li>
+                <li><a href="/myapp/tutorial">Tutorial</a></li>
+                <li><a href="/myapp/contact">Contact</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/accounts/logout">Logout</a></li>
+              </ul>
+            </div>
+        </nav>
+        <div class = "container">
+        <form action="{% url 'home' %}" class = "contact-form">
+            <div class="row">
+                <div class="input-field col s4">
+                    <p></p>
+                </div>
+                <div class="input-field col s4">
+                    <input id = "name" type="text"> </input>
+                    <label>
+                        Name
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <p></p>
+                </div>
+                <div class="input-field col s4">
+                    <input id = "e-mail" type="text"> </input>
+                    <label>
+                        Email
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <p></p>
+                </div>
+                <div class="input-field col s4">
+                    <input id = "message" type="text"> </input>
+                    <label>
+                        Message
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    <p></p>
+                </div>
+                <div>
+                    <button class="btn blue waves-effect waves-light" type="submit"><i class="material-icons left">send</i>Send</button>
+                </div>
+            </div>
+
+
+        </form>
+        </div>
+
+    </body>
+
+
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">About Old Driver </h5>
+                    <p class="grey-text text-lighten-4">Old Driver classifier is a small website designed for processing small dataset. It has three main funcionalities:</p>
+                      <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">label</i>Auto-classification</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Find the best model among Naive Bayes, Decision Tree, Random Forest and Support Vector Machine for your dataset.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">equalizer</i>Exploration</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Help you explore your dataset by proper visualization.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">settings_ethernet</i>DIY</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Tune parameters for the model by yourself.</p></div>
+                        </li>
+                      </ul>
+                    <p class="grey-text text-lighten-4">Hope this website can be an old driver who could help you speed up the process of data analytics!</p>
+
+                </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Relevant Resources</h5>
+                        <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.kosbie.net/cmu/spring-16/15-112/"><i class="material-icons">info</i>CMU 15-112</a></li>
+                        <label class="grey-text text-lighten-3">The Best Introduction Course of Computer Science</label>
+                        <li><a class="grey-text text-lighten-3" href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning"><i class="material-icons">info</i>Supervised Learning from Scikit Learn </a></li>
+                        <label class="grey-text text-lighten-3">Classification Techniques Used for this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/"><i class="material-icons">info</i>Materialize </a></li>
+                        <label class="grey-text text-lighten-3">The Front-end Framework Used for Building this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/hailyu"><i class="material-icons">info</i>Hai Lyu's LinkedIn</a></li>
+                        <label class="grey-text text-lighten-3">Just in case you want to learn more about the author</label>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Hai Lyu, All rights reserved.
+                <a class="grey-text text-lighten-4 right" href="#!">Powered by Old Driver Club</a>
+            </div>
+        </div>
+    </footer>
+
+
+</html>

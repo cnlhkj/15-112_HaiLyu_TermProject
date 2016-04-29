@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+            $(document).ready(function(){
+                $('.materialboxed').materialbox();
+            });
+        </script>
+        <!-- Icons! -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Tune the parameters by yourself!</title>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper blue">
+              <a href="#" class="brand-logo">  Old Driver Classifier</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/myapp/home">Home</a></li>
+                <li><a href="/myapp/about">About</a></li>
+                <li><a href="/myapp/tutorial">Tutorial</a></li>
+                <li><a href="/myapp/contact">Contact</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/accounts/logout">Logout</a></li>
+              </ul>
+            </div>
+        </nav>
+        <!-- choose the target class-->
+        <div class="container">
+            <div class = "row">
+                <div class = "col s6">
+                {% if file %}
+                    <label>Selected Dataset:</label>
+                    <p>{{ file.documentName }}</p>
+                {% else %}
+                    <p>No documents.</p>
+                {% endif %}
+                </div>
+                <div class = "col s6">
+                    <label>Selected Class:</label>
+                    <p>{{target}}</p>
+                </div>
+            </div>
+            <div>
+                <h5 class="center-align">The result of {{DIYMethod}} Classification is:</h5>
+            </div>
+            <br>
+            <table>
+            {% for line in Result %}
+                <tr>
+                {% for item in line %}
+                    <td> {{item}} </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </table>
+            <br>
+            <div>
+                <h5 class="left-align">The average performance of 10-fold cross-validation is: {{CVAccu}}</h5>
+            </div>  
+
+            {% if DIYMethod == "Decision Tree" %}
+                <img class="materialboxed" src="/media/tree.png" alt="Tree" align="middle">
+            {% endif %}
+
+
+
+            <form action="{% url 'DIY' %}" method="post">
+                {% csrf_token %}
+
+                <div class = "row">
+                    <div class = "col s6">
+                        <tr>
+                            <td>
+                                <label>Select the CLASS Variable</label>
+                                <select name = "dropdownClass">
+                                    {% for colName in file.colNames %}
+                                        <option value = "{{ colName }}" {% if forloop.last %} selected {% endif %} > {{ colName }} </option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+                <ul>
+                     <input type="hidden" name="document_id" value="{{document_id}}" />
+                </ul>
+                <ul>
+                     <input type="hidden" name="DIYMethod" value="{{DIYMethod}}" />
+                </ul>
+                <div>
+                    <h5 class="left-align">Tune the parameters:</h5>
+                </div>
+
+
+                {% if DIYMethod == "Decision Tree" %}
+                    <br>
+                    <div class = "row">
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    criterion
+                                    <select name = "criterion">
+                                        <option value = "gini" > gini </option>
+                                        <option value = "entropy" > entropy </option>
+                                    </select>
+                                </td>
+                            </tr>                            
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                splitter
+                                <td>
+                                    <select name = "splitter">
+                                        <option value = "best" > best </option>
+                                        <option value = "random" > random </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            max features <input type="text" name="max_features" value="None">
+                        </div>
+                        <div class="col s4">
+                            max depth <input type="text" name="max_depth" value="None">
+                        </div>
+                        <div class="col s4">
+                            min samples split <input type="number" name="min_samples_split" min="2" value="2">
+                        </div>
+                        <div class="col s4">
+                            min samples leaf <input type="number" name="min_samples_leaf" min="0" value="1">
+                        </div>
+                        <div class="col s4">
+                            min weight fraction leaf <input type="number" name="min_weight_fraction_leaf" value="0">
+                        </div>
+                        <div class="col s4">
+                            max leaf nodes <input type="text" name="max_leaf_nodes" value="None">
+                        </div>
+                        <div class="col s4">
+                            class weight <input type="text" name="class_weight" value="None">
+                        </div>
+                        <div class="col s4">
+                            random state <input type="text" name="random_state" value="None">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    presort
+                                    <select name = "presort" >
+                                        <option value = "False" > False </option>
+                                        <option value = "True" > True </option>
+                                    </select>
+                                </td>
+                            </tr>     
+                        </div>
+                        
+
+                    </div>
+
+
+
+                {% elif DIYMethod == "Random Forest" %}
+                    <div class = "row">
+                        <div class="col s4">
+                            number of trees <input type="number" name="n_estimators" min="1" value="10">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    criterion
+                                    <select name = "criterion">
+                                        <option value = "gini" > gini </option>
+                                        <option value = "entropy" > entropy </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            max features <input type="text" name="max_features" value="auto">
+                        </div>
+                        <div class="col s4">
+                            max depth <input type="text" name="max_depth" value="None">
+                        </div>
+                        <div class="col s4">
+                            min samples split <input type="number" name="min_samples_split" min="2" value="2">
+                        </div>
+                        <div class="col s4">
+                            min samples leaf <input type="number" name="min_samples_leaf" min="0" value="1">
+                        </div>
+                        <div class="col s4">
+                            min weight fraction leaf <input type="number" name="min_weight_fraction_leaf" value="0">
+                        </div>
+                        <div class="col s4">
+                        max leaf nodes <input type="text" name="max_leaf_nodes" value="None">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    bootstrap
+                                    <select name = "bootstrap">
+                                        <option value = "True" > False </option>
+                                        <option value = "False" > True </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    out-of-bag score
+                                    <select name = "oob_score">
+                                        <option value = "False" > False </option>
+                                        <option value = "True" > True </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            number of jobs <input type="number" name="n_jobs" min="-1" value="1">
+                        </div>
+                        <div class="col s4">
+                            random state <input type="text" name="random_state" value="None">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    warm start
+                                    <select name = "warm_start">
+                                        <option value = "False" > False </option>
+                                        <option value = "True" > True </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            verbose <input type="text" name="verbose" value="None">
+                        </div>
+                        <div class="col s4">
+                            class weight <input type="text" name="class_weight" value="None"> 
+                        </div>
+                    </div>
+
+
+                {% elif DIYMethod == "Support Vector Machine" %}
+                    <div class = "row">
+                        <div class="col s4">
+                            parameter C <input type="number" name="C" min="1.0" value="1.0">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    kernel
+                                    <select name = "kernel">
+                                        <option value = "linear" > linear </option>
+                                        <option value = "rbf" > rbf </option>
+                                        <option value = "poly" > poly </option>
+                                        <option value = "sigmoid" > sigmoid </option>
+                                    </select>
+                                </td>
+                            </tr>                            
+                        </div>
+                        <div class="col s4">
+                            degree (only for kernel "ploy") <input type="number" name="degree" value="3">
+                        </div>
+                        <div class="col s4">
+                            gamma (for kernel "rbf", "poly" and "sigmoid") <input type="text" name="gamma" value="auto">
+                        </div>
+                        <div class="col s4">
+                            coef0 (for kernel "poly" and "sigmoid") <input type="number" name="coef0" value="0.0">
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    probability
+                                    <select name = "probability">
+                                        <option value = "False" > False </option>
+                                        <option value = "True" > True </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            <tr>
+                                <td>
+                                    shrinking
+                                    <select name = "shrinking">
+                                        <option value = "True" > True </option>
+                                        <option value = "False" > False </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </div>
+                        <div class="col s4">
+                            tolerance <input type="text" name="tol" value="1e-3">
+                        </div>
+                        <div class="col s4">
+                            cache size <input type="number" name="cache_size" value="200">
+                        </div>
+                        <div class="col s4">
+                            verbose <input type="number" name="verbose" value="0">
+                        </div>
+                        <div class="col s4">
+                            class weight <input type="text" name="class_weight" value="None">
+                        </div>
+                        <div class="col s4">
+                            max iteration <input type="number" name="max_iter" value="-1">
+                        </div>
+                        <div class="col s4">
+                            decision function shape <input type="number" name="decision_function_shape" min="-1" value="1">
+                        </div>
+                        <div class="col s4">
+                            random state <input type="text" name="random_state" value="None">
+                        </div>                     
+                    </div>
+
+
+                {% endif %}
+                
+                <div class = "row">
+                    <div class="col s4">
+                        <p></p>
+                    </div>
+                    <div class="col s4">
+                        <tr>
+                            <td>
+                             <button class="btn blue waves-effect waves-light" type="submit" name = "action" value="Classification">Classification</button>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+
+
+                <label>  Change the method: </label>>
+                <br>
+                <div class = "row">
+                    <div class="col s4">
+                        <tr>
+                            <td>
+                                <select name = "ChangeDIYMethod">
+                                    <option value = "Decision Tree"> Decision Tree </option>
+                                    <option value = "Support Vector Machine" > Support Vector Machine </option>
+                                    <option value = "Random Forest"> Random Forest </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </div>
+                    <div class="col s4">
+                        <ul>
+                             <input type="hidden" name="target" value="{{target}}" />
+                        </ul>
+                        <tr>
+                            <td>
+                             <button class="btn blue waves-effect waves-light" type="submit" name = "action" value="Channge Method">Change Method</button>
+                            </td>
+                        </tr>
+                    </div>
+                </div>
+
+            </form>
+            <br>
+            <br>
+            <a href="/myapp/home">Home</a>
+        </div>
+    </body>
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">About Old Driver </h5>
+                    <p class="grey-text text-lighten-4">Old Driver classifier is a small website designed for processing small dataset. It has three main funcionalities:</p>
+                      <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">label</i>Auto-classification</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Find the best model among Naive Bayes, Decision Tree, Random Forest and Support Vector Machine for your dataset.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">equalizer</i>Exploration</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Help you explore your dataset by proper visualization.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">settings_ethernet</i>DIY</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Tune parameters for the model by yourself.</p></div>
+                        </li>
+                      </ul>
+                    <p class="grey-text text-lighten-4">Hope this website can be an old driver who could help you speed up the process of data analytics!</p>
+
+                </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Relevant Resources</h5>
+                        <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.kosbie.net/cmu/spring-16/15-112/"><i class="material-icons">info</i>CMU 15-112</a></li>
+                        <label class="grey-text text-lighten-3">The Best Introduction Course of Computer Science</label>
+                        <li><a class="grey-text text-lighten-3" href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning"><i class="material-icons">info</i>Supervised Learning from Scikit Learn </a></li>
+                        <label class="grey-text text-lighten-3">Classification Techniques Used for this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/"><i class="material-icons">info</i>Materialize </a></li>
+                        <label class="grey-text text-lighten-3">The Front-end Framework Used for Building this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/hailyu"><i class="material-icons">info</i>Hai Lyu's LinkedIn</a></li>
+                        <label class="grey-text text-lighten-3">Just in case you want to learn more about the author</label>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Hai Lyu, All rights reserved.
+                <a class="grey-text text-lighten-4 right" href="#!">Powered by Old Driver Club</a>
+            </div>
+        </div>
+    </footer>
+
+</html>

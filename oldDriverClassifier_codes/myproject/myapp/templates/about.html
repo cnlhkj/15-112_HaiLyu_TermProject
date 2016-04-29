@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <script>
+        $(document).ready(function () {
+        $('.slider').slider();
+        });
+        </script>
+        </script>
+        <!-- Icons! -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>About</title>
+    </head>
+
+    <body>
+
+        <nav>
+            <div class="nav-wrapper blue">
+              <a href="#" class="brand-logo">  Old Driver Classifier</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/myapp/home">Home</a></li>
+                <li><a href="/myapp/about">About</a></li>
+                <li><a href="/myapp/tutorial">Tutorial</a></li>
+                <li><a href="/myapp/contact">Contact</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/accounts/logout">Logout</a></li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+
+        <h1 align="middle"> About</h1>
+
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="/media/yilongchang.JPG"> <!-- random image -->
+                    <div class="caption center-align">
+                      <h3>The leader of Old Driver Club</h3>
+                      <h5 class="light grey-text text-lighten-3">The One and Only Yilong Chang</h5>
+                    </div>
+                </li>
+                <li>
+                    <img src="/media/chehui.jpg"> <!-- random image -->
+                    <div class="caption right-align">
+                      <h3>The Ritual of Old Driver Club</h3>
+                      <h5 class="light grey-text text-lighten-3">Eat hot pot with thumbs up</h5>
+                    </div>
+                </li>
+                <li>
+                <img src="/media/hailyu.jpg"> <!-- random image -->
+                <div class="caption left-align">
+                      <h3>The maker of this poor website</h3>
+                      <h5 class="light grey-text text-lighten-3">Hai Lyu</h5>
+                </div>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <br>
+
+
+        <div class="row">
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Motivation</span>
+                        <p>Sometimes you just want to do some simple classification over a small database, and you don't want to use those dumb softwares or write codes from scratch. Therefore, the maker wanted to make a website to make the process of analytics easier for users. And now, here it is.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">About the Maker</span>
+                        <p>The maker of this website is Hai Lyu. He is young and vibrant. He is also very handsome. But the most important thing is that he is very modest. That's why he did not show his face in the sliders.</p>
+                        <p>He is also a member of Old Driver Club. That's why he wants to introduce a little bit about this mysterious organization.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">About Old Driver Club</span>
+                            <p>The Old Driver Club is a cult created by the one and only Yilong Change. The club is made up of people who believe in the power of technology. As cars are products of human beings' wisdom, Yilong used cars as the symbol of the club, and he proposed that the members called themselves "old drivers". Therefore, the club was named as "Old Driver Club".</p>
+                            <p>During the process of making the website, the old drivers, especially Yilong himself, helped Hai Lyu a lot. Therefore, Hai decided to make this page to thank all the old drivers. If you want to learn more about this club, please feel free to contact Hai Lyu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </body>
+
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">About Old Driver </h5>
+                    <p class="grey-text text-lighten-4">Old Driver classifier is a small website designed for processing small dataset. It has three main funcionalities:</p>
+                      <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">label</i>Auto-classification</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Find the best model among Naive Bayes, Decision Tree, Random Forest and Support Vector Machine for your dataset.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">equalizer</i>Exploration</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Help you explore your dataset by proper visualization.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">settings_ethernet</i>DIY</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Tune parameters for the model by yourself.</p></div>
+                        </li>
+                      </ul>
+                    <p class="grey-text text-lighten-4">Hope this website can be an old driver who could help you speed up the process of data analytics!</p>
+
+                </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Relevant Resources</h5>
+                        <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.kosbie.net/cmu/spring-16/15-112/"><i class="material-icons">info</i>CMU 15-112</a></li>
+                        <label class="grey-text text-lighten-3">The Best Introduction Course of Computer Science</label>
+                        <li><a class="grey-text text-lighten-3" href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning"><i class="material-icons">info</i>Supervised Learning from Scikit Learn </a></li>
+                        <label class="grey-text text-lighten-3">Classification Techniques Used for this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/"><i class="material-icons">info</i>Materialize </a></li>
+                        <label class="grey-text text-lighten-3">The Front-end Framework Used for Building this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/hailyu"><i class="material-icons">info</i>Hai Lyu's LinkedIn</a></li>
+                        <label class="grey-text text-lighten-3">Just in case you want to learn more about the author</label>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Hai Lyu, All rights reserved.
+                <a class="grey-text text-lighten-4 right" href="#!">Powered by Old Driver Club</a>
+            </div>
+        </div>
+    </footer>
+
+
+</html>

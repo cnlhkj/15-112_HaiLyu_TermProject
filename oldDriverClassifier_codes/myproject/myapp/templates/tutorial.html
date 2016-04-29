@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <!-- Icons! -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>How to use this website</title>
+    </head>
+
+    <body>
+
+        <nav>
+            <div class="nav-wrapper blue">
+              <a href="#" class="brand-logo">  Old Driver Classifier</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/myapp/home">Home</a></li>
+                <li><a href="/myapp/about">About</a></li>
+                <li><a href="/myapp/tutorial">Tutorial</a></li>
+                <li><a href="/myapp/contact">Contact</a></li>
+                <li><a href="{% url 'auth_logout' %}?next=/accounts/logout">Logout</a></li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <h1> Tutorial of Old Driver Classifier</h1>
+
+
+
+            <p>
+                Hi! Welcome to Old Driver Classifier. You might wonder what you can do with this website. Well, this website would be really helpful if you want to use a dataset to train a classification model, and you want to have a quick overview of the performance of some popular models trained based on this model. Afer you load your dataset in the home page, you will see three buttons. Those buttons represent the three main functions of this website.
+                <li><a href="#auto-classification">Auto-classification</a></li>
+                <li><a href="#exploration">Exploration</a></li>
+                <li><a href="#diy">DIY</a></li>
+            <ul>
+
+            <p>
+                Below is a vedio showing the functions of the website. It would be helpful if you take a look at it.
+            </p>
+
+            <iframe width="900" height="600" src="https://www.youtube.com/embed/Se9ksRbam7s" frameborder="0" allowfullscreen></iframe>
+
+            <h2><a name="auto-classification">Auto-classification</a></h2>
+            <p>
+                The old driver classifier pre-chose four popular machine learning algorithms: Naive Bayes, Decision Tree, Support Vector Machine and Random Forest. If you click on the the "classification" button, you will get:
+            </p>
+            <ul>
+                <li>The best model among those four models and its 10-fold cross-validation accuracy; (1 is the 100% correct and 0 is 0)</li>
+                <li>The receiver operating characteristic (ROC) curve of the best model;</li>
+                <li>The the report of all the four models;</li>
+
+            </ul>
+            <p>
+                Simply speaking, the higher the 10-fold cross-validation accuracy is, the more powerful the model would be, and the closer the ROC curve is curved to the left top corner, the better the model would be. Anyway, after clicking on the "classification" button, you can say something like "hey, random forest works perfectly on our dataset" to your boss, and you and your boss will think you can get the shit done, and you are both very happy.
+            </p>
+            <p>
+                If you want to learn more about some concepts mentioned above, the links below might be helpful. 
+            </p>
+            <ul>
+                <li><a href="http://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes">Naive Bayes</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/tree.html">Decision Tree</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/svm.html">Support Vector Machine</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/ensemble.html#random-forests">Random Forest</a></li>
+                <li><a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_roc.html">ROC Curve</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_recall_fscore_support.html">Precision, Recall, F1 Score and Support </a></li>
+
+            </ul>
+            <p>
+                And if you could not understand a single word above, congratulations! You don't have to suffer anymore because you might want to choose other tools which might be more suitable for you. Thanks!
+            </p>
+
+
+            <h2><a name="exploration">Exploration</a></h2>
+            <p>
+                This function is simple. It will give a histogram or barchart of the variable you chose. Also, it will produce pair plots of all the numeric variables in in the whole dataset, and the color label will be the variable you choose.
+            </p>
+            <p>
+                If you could not understand the graphs, you might need to take some statistic courses. There are some links which might be helpful:
+            </p>
+
+
+            <ul>
+                <li><a href="https://www.edx.org/course/introduction-statistics-descriptive-uc-berkeleyx-stat2-1x">Introduction to Statistics: Descriptive Statistics</a></li>
+                <li><a href="https://www.udacity.com/course/intro-to-statistics--st101">Intro to Statistics</a></li>
+
+            </ul>
+            <p>
+                But if you still could not understand what I was saying, then go fuck yourself please.
+
+            </p>
+            <h2><a name="diy">DIY</a></h2>
+            <p>
+                Say, you told your boss, that Support Vector Machine would be the best model for your dataset. But your boss might know something about machine learnning techniques. And he or she might ask, "Well, what is the exponent of the polykernel?" And you might feel like, "WTF?" But, no worries. The old driver classifer provides a DIY interface for three algorithms: Decision Tree, Support Vector Machine and Random Forest. Why no Naive Bayes? Because there is no paremater to tune for Naive Bayes.
+            </p>
+            <p>
+                Anyway, if you or your boss want to tune some parameters on your own, feel free to click the DIY button. It will generate report of the performance for you. And you can also change the method if you would like to. 
+            </p>  
+            <p>
+                If you want to learn more about the parameters, you can check the links below:
+            </p>  
+            <ul>
+                <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier">Parameters of Decision Tree</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC">Parameters of Support Vector Machine</a></li>
+                <li><a href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html#sklearn.ensemble.RandomForestClassifier">Parameters of Random Forest</a></li>
+            </ul>
+        </div>
+
+    </body>
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">About Old Driver </h5>
+                    <p class="grey-text text-lighten-4">Old Driver classifier is a small website designed for processing small dataset. It has three main funcionalities:</p>
+                      <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">label</i>Auto-classification</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Find the best model among Naive Bayes, Decision Tree, Random Forest and Support Vector Machine for your dataset.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">equalizer</i>Exploration</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Help you explore your dataset by proper visualization.</p></div>
+                        </li>
+                        <li>
+                          <div class="collapsible-header"><i class="material-icons">settings_ethernet</i>DIY</div>
+                          <div class="collapsible-body"><p class="grey-text text-lighten-4">Tune parameters for the model by yourself.</p></div>
+                        </li>
+                      </ul>
+                    <p class="grey-text text-lighten-4">Hope this website can be an old driver who could help you speed up the process of data analytics!</p>
+
+                </div>
+                    <div class="col l4 offset-l2 s12">
+                        <h5 class="white-text">Relevant Resources</h5>
+                        <ul>
+                        <li><a class="grey-text text-lighten-3" href="http://www.kosbie.net/cmu/spring-16/15-112/"><i class="material-icons">info</i>CMU 15-112</a></li>
+                        <label class="grey-text text-lighten-3">The Best Introduction Course of Computer Science</label>
+                        <li><a class="grey-text text-lighten-3" href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning"><i class="material-icons">info</i>Supervised Learning from Scikit Learn </a></li>
+                        <label class="grey-text text-lighten-3">Classification Techniques Used for this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="http://materializecss.com/"><i class="material-icons">info</i>Materialize </a></li>
+                        <label class="grey-text text-lighten-3">The Front-end Framework Used for Building this Website</label>
+                        <li><a class="grey-text text-lighten-3" href="https://www.linkedin.com/in/hailyu"><i class="material-icons">info</i>Hai Lyu's LinkedIn</a></li>
+                        <label class="grey-text text-lighten-3">Just in case you want to learn more about the author</label>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Hai Lyu, All rights reserved.
+                <a class="grey-text text-lighten-4 right" href="#!">Powered by Old Driver Club</a>
+            </div>
+        </div>
+    </footer>
+
+
+</html>

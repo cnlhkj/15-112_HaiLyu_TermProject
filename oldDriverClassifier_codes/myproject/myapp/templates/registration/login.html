@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+        <!-- Icons! -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Let's play with old drivers</title>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper blue">
+              <a href="#" class="brand-logo">Old Driver Classifier</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            
+            <h1 align="middle">Let's play with the old drivers</h1>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <p> </p>
+                </div>
+
+            
+                <div class="col s12 m4">
+                    <form method="post" action=".">
+                       {% csrf_token %}
+                       {{form.as_p }}
+                        <button class="btn blue waves-effect waves-light" type="submit"><a href="{% url 'auth_login' %}" style="color: rgb(255,255,255)">Login</a></button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                    <p>Not  a member? <a href="{% url 'registration_register' %}">Register</a>!</p>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </body>
+</html>
